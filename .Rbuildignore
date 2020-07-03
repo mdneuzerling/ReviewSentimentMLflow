@@ -1,0 +1,7 @@
+^renv$
+^renv\.lock$
+^ReviewSentiment\.Rproj$
+^\.Rproj\.user$
+^\.drake$
+^artefacts$
+^\.github$
