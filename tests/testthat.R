@@ -1,4 +1,4 @@
 library(testthat)
-library(ReviewSentiment)
+library(ReviewSentimentMLflow)
 
-test_check("ReviewSentiment")
+test_check("ReviewSentimentMLflow")
