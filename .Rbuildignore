@@ -5,3 +5,7 @@
 ^\.drake$
 ^artefacts$
 ^\.github$
+^Dockerfile$
+^ReviewSentimentMLflow\.Rproj$
+^mlruns$
+^run-and-test-mlflow\.R$
