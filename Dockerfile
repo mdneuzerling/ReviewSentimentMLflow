@@ -1,6 +1,6 @@
 FROM rocker/r-ver:4.0.0
 ENV RENV_VERSION 0.10.0
-ENV CRAN_REPO https://packagemanager.rstudio.com/all/__linux__/bionic/latest
+ENV CRAN_REPO https://packagemanager.rstudio.com/all/__linux__/focal/latest
 ENV LISTENING_HOST 0.0.0.0
 ENV LISTENING_PORT 5000
 # Copy the entirety of the context into the image. This should be the R package source.
@@ -12,13 +12,13 @@ WORKDIR /model-package
 RUN apt-get -y update && \
     apt-get install -y curl libgit2-dev libssl-dev zlib1g-dev \
     pandoc pandoc-citeproc make libxml2-dev libgmp-dev libgfortran4 \
-    libcurl4-openssl-dev libssh2-1-dev libglpk-dev git-core libicu-dev
+    libcurl4-openssl-dev libssh2-1-dev libglpk-dev git-core
 
 # renv::restore can be a bit buggy if .Rprofile and the renv directory exist
 RUN rm -f .Rprofile
 RUN rm -rf renv
-RUN R -e "install.packages('remotes', repos = c(CRAN = Sys.getenv('CRAN_REPO')))"
-RUN R -e "remotes::install_github('rstudio/renv', ref = Sys.getenv('RENV_VERSION'))"
+RUN Rscript -e "install.packages('remotes', repos = c(CRAN = Sys.getenv('CRAN_REPO')))"
+RUN Rscript -e "remotes::install_github('rstudio/renv', ref = Sys.getenv('RENV_VERSION'))"
 RUN Rscript -e "renv::restore(repos = c(CRAN = Sys.getenv('CRAN_REPO')))"
 
 # Install miniconda to /miniconda and install mlflow
