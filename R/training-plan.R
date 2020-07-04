@@ -33,9 +33,8 @@ training_plan <- function() {
     },
     packaged_model = carrier::crate(
       function(review) { # Function must be "fresh", ie. not pre-defined
-        sentiment(review, review_rf, vectoriser, tfidf)
+        ReviewSentimentMLflow::sentiment(review, review_rf, vectoriser, tfidf)
       },
-      sentiment = sentiment,
       review_rf = review_rf,
       vectoriser = vectoriser,
       tfidf = tfidf
