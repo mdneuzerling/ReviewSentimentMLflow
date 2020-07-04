@@ -31,7 +31,7 @@ training_plan <- function() {
       readr::write_rds(tfidf, file_out("artefacts/tfidf.rds"))
       readr::write_rds(review_rf, file_out("artefacts/review_rf.rds"))
     },
-    packaged_model = carrier::crate(
+    crated_model = carrier::crate(
       function(review) { # Function must be "fresh", ie. not pre-defined
         ReviewSentimentMLflow::sentiment(review, review_rf, vectoriser, tfidf)
       },
@@ -40,7 +40,7 @@ training_plan <- function() {
       tfidf = tfidf
     ),
     save_model = mlflow::mlflow_save_model(
-      packaged_model,
+      crated_model,
       drake::file_out("artefacts/model")
     )
   )
